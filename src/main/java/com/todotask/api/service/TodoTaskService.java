@@ -13,6 +13,7 @@ import com.todotask.api.config.exception.ResourceAlreadyExistsException;
 import com.todotask.api.dto.TodoTaskDto;
 import com.todotask.api.model.Piority;
 import com.todotask.api.model.TotoTask;
+import com.todotask.api.repository.PiorityRepository;
 import com.todotask.api.repository.TodoTaskRepository;
 import org.springframework.data.domain.Page;
 
@@ -21,8 +22,8 @@ import org.springframework.data.domain.Sort;
 public class TodoTaskService {
 	@Autowired
 	private TodoTaskRepository todoTaskRepository;
-	public Page<TotoTask> getAll(Optional<Integer> page,Integer size ) {		
-		//return todoTaskRepository.findAll(PageRequest.of(page.orElse(0), size,Sort.Direction.DESC, sortBy.orElse("piorityId")));
+	private PiorityRepository piorityRepository;
+	public Page<TotoTask> getAll(Optional<Integer> page,Integer size ) {	
 		return todoTaskRepository.findAll(PageRequest.of(page.orElse(0),size,Sort.by(Sort.Direction.DESC, "piority")));
 	}
 	public TotoTask findByDescription(String description) {
@@ -30,18 +31,17 @@ public class TodoTaskService {
 	}
 
 	public void save(TodoTaskDto taskDto) throws Exception {
+		
 		TotoTask check = todoTaskRepository.findByDescription(taskDto.getDescription());
 		if (check == null) {
 			var TotoTaskEntiry = new TotoTask();
 			BeanUtils.copyProperties(taskDto, TotoTaskEntiry);
-			TotoTaskEntiry.setId(taskDto.getId());
+			Piority piority=piorityRepository.findById(taskDto.getPiorityId()).get();
+			TotoTaskEntiry.setPiority(piority);
 			todoTaskRepository.save(TotoTaskEntiry);
 		} else {
-			throw new ResourceAlreadyExistsException("This task already existed");
+			check.setDescription(taskDto.getDescription());
+			todoTaskRepository.save(check);
 		}
 	}
-
-	
-	
-	
 }

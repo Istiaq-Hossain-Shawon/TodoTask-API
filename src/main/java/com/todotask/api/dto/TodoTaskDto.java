@@ -10,7 +10,7 @@ public class TodoTaskDto {
 	
 	private Boolean isDone;
 	
-	private Piority piority; 
+	private int piorityId; 
 	
 	private String createdBy;
 	
@@ -39,12 +39,12 @@ public class TodoTaskDto {
 		this.description = description;
 	} 
 
-	public TodoTaskDto(int id, String description,Boolean isDone,Piority piority) {
+	public TodoTaskDto(int id, String description,Boolean isDone,int piorityId) {
 		super();
 		this.id = id;
 		this.setDescription(description);
 		this.setIsDone(isDone);
-		this.setPiority(piority);
+		this.setPiorityId(piorityId);
 		
 		
 	}
@@ -56,13 +56,15 @@ public class TodoTaskDto {
 		this.isDone = isDone;
 	}
 
-	public Piority getPiority() {
-		return piority;
+	public int getPiorityId() {
+		return piorityId;
 	}
 
-	public void setPiority(Piority piority) {
-		this.piority = piority;
+	public void setPiorityId(int piorityId) {
+		this.piorityId = piorityId;
 	}
+
+	
 	
 	
 }

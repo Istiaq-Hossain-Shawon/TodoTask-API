@@ -49,8 +49,8 @@ public class TodoTaskController {
 	{
 		try
 		{
-			ResponseDTO responseDTO = new ResponseDTO();
-
+			todoTaskService.save(taskDTO);
+			ResponseDTO responseDTO = TodoTaskUtil.createResponseSuccess();
 			return responseDTO;
 		}
 		catch (Exception e)

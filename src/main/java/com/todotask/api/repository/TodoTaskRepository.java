@@ -1,6 +1,8 @@
 package com.todotask.api.repository;
 
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.domain.Page;
@@ -16,5 +18,6 @@ import com.todotask.api.model.TotoTask;
 public interface TodoTaskRepository extends JpaRepository<TotoTask,Integer> {
 	TotoTask findByDescription(String description);
 	Page<TotoTask> findAll(Pageable pageable);
+	Page<TotoTask> findByIsDone(Optional<Boolean> isDone,Pageable pageable);
 	
 }

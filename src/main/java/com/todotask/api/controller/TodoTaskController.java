@@ -26,13 +26,14 @@ public class TodoTaskController {
 	 private final Logger logger = LoggerFactory.getLogger(TodoTaskController.class);
 	
 	@GetMapping(value = "/todoTasks")
-	public Page<TotoTask>  todoTask(@RequestParam(value = "page") Optional<Integer> page,@RequestParam(value = "size") Integer size) {
-		Page<TotoTask> data=todoTaskService.getAll(page,size);
+	public Page<TotoTask>  todoTask(@RequestParam(value = "page") Optional<Integer> page,@RequestParam(value = "size") Integer size,
+			@RequestParam(value = "isDone") Optional<Boolean> isDone) {
+		Page<TotoTask> data=todoTaskService.getAll(page,size,isDone);
 		return data;
 	}	
 	
 	@PostMapping(value = "/saveTask")	
-	public ResponseDTO saveTask(@RequestBody TodoTaskDto taskDTO, Principal principal)
+	public ResponseDTO saveTask(@RequestBody TodoTaskDto taskDTO)
 	{
 		if(TodoTaskUtil.checkIfNull(taskDTO.getDescription())) {
 			logger.error("Description is mendatory.");			
@@ -41,6 +42,10 @@ public class TodoTaskController {
 		if(TodoTaskUtil.checkIfNull(taskDTO.getPiorityName())) {
 			logger.error("Piority Name is mendatory.");			
 			return TodoTaskUtil.createResponseFalied("Piority Name is mendatory.");
+		}
+		if((taskDTO.getIsDone())==null) {
+			logger.error("Task status is mendatory.");			
+			return TodoTaskUtil.createResponseFalied("Task status is mendatory.");
 		}
 		
 		try
@@ -55,6 +60,7 @@ public class TodoTaskController {
 			return TodoTaskUtil.createResponseFalied(e.getMessage());
 		}
 	}
+	
 	
 	@GetMapping(value = {"/home"})
 	public String  home() {

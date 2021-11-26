@@ -23,8 +23,12 @@ public class TodoTaskService {
 	private TodoTaskRepository todoTaskRepository;
 	@Autowired
 	private PiorityRepository piorityRepository;
-	public Page<TotoTask> getAll(Optional<Integer> page,Integer size ) {	
-		return todoTaskRepository.findAll(PageRequest.of(page.orElse(0),size,Sort.by(Sort.Direction.DESC, "piority")));
+	public Page<TotoTask> getAll(Optional<Integer> page,Integer size,Optional<Boolean> isDone ) {	
+		if(isDone.isEmpty()) {
+			return todoTaskRepository.findAll(PageRequest.of(page.orElse(0),size,Sort.by(Sort.Direction.DESC, "piority")));
+		}else {
+			return todoTaskRepository.findByIsDone(isDone,PageRequest.of(page.orElse(0),size,Sort.by(Sort.Direction.DESC, "piority")));
+		}		
 	}
 	public TotoTask findByDescription(String description) {
 		return  todoTaskRepository.findByDescription(description);

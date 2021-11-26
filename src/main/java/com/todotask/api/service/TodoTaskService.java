@@ -21,9 +21,9 @@ import org.springframework.data.domain.Sort;
 public class TodoTaskService {
 	@Autowired
 	private TodoTaskRepository todoTaskRepository;
-	public Page<TotoTask> getAll(Optional<Integer> page,Optional<String> sortBy) {		
-		return todoTaskRepository.findAll(PageRequest.of(page.orElse(0), 10,
-                        Sort.Direction.DESC, sortBy.orElse("piorityId")));
+	public Page<TotoTask> getAll(Optional<Integer> page,Integer size ) {		
+		//return todoTaskRepository.findAll(PageRequest.of(page.orElse(0), size,Sort.Direction.DESC, sortBy.orElse("piorityId")));
+		return todoTaskRepository.findAll(PageRequest.of(page.orElse(0),size,Sort.by(Sort.Direction.DESC, "piority")));
 	}
 	public TotoTask findByDescription(String description) {
 		return  todoTaskRepository.findByDescription(description);

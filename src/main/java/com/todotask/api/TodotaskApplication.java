@@ -49,19 +49,19 @@ public class TodotaskApplication {
 	@PostConstruct
     public void initTodoTask() throws Exception {
 		if(todoTaskService.findByDescription("Task 1")==null) {
-			todoTaskService.save(new TodoTaskDto(1, "Task 1",false,1));
+			todoTaskService.save(new TodoTaskDto(1, "Task 1",false,"low"));
 		}
 		if(todoTaskService.findByDescription("Task 2")==null) {
-			 todoTaskService.save(new TodoTaskDto(2, "Task 2",false,3));
+			 todoTaskService.save(new TodoTaskDto(2, "Task 2",false,"high"));
 		}
 		if(todoTaskService.findByDescription("Task 3")==null) {
-			todoTaskService.save(new TodoTaskDto(3, "Task 3",false,2));;
+			todoTaskService.save(new TodoTaskDto(3, "Task 3",false,"low"));;
 		}
 		if(todoTaskService.findByDescription("Task 4")==null) {
-			todoTaskService.save(new TodoTaskDto(4, "Task 4",false,2));;
+			todoTaskService.save(new TodoTaskDto(4, "Task 4",false,"medium"));;
 		}
 		if(todoTaskService.findByDescription("Task 5")==null) {
-			todoTaskService.save(new TodoTaskDto(5, "Task 5",false,1));;
+			todoTaskService.save(new TodoTaskDto(5, "Task 5",false,"high"));;
 		}        
     }
 	

@@ -18,9 +18,6 @@ import com.todotask.api.model.TotoTask;
 import com.todotask.api.response.ResponseDTO;
 import com.todotask.api.service.TodoTaskService;
 
-
-
-
 @RestController
 public class TodoTaskController {
 	
@@ -35,12 +32,20 @@ public class TodoTaskController {
 	}	
 	
 	@PostMapping(value = "/saveTask")	
-	public ResponseDTO beftnTransactionSingle(@RequestBody TodoTaskDto taskDTO, Principal principal)
+	public ResponseDTO saveTask(@RequestBody TodoTaskDto taskDTO, Principal principal)
 	{
+		if(TodoTaskUtil.checkIfNull(taskDTO.getDescription())) {
+			logger.error("Description is mendatory.");			
+			return TodoTaskUtil.createResponseFalied("Description is mendatory.");
+		}
+		if(TodoTaskUtil.checkIfNull(taskDTO.getPiorityName())) {
+			logger.error("Piority Name is mendatory.");			
+			return TodoTaskUtil.createResponseFalied("Piority Name is mendatory.");
+		}
+		
 		try
 		{
-			todoTaskService.save(taskDTO);
-			ResponseDTO responseDTO = TodoTaskUtil.createResponseSuccess();
+			ResponseDTO responseDTO = todoTaskService.save(taskDTO);
 			return responseDTO;
 		}
 		catch (Exception e)
@@ -53,7 +58,6 @@ public class TodoTaskController {
 	
 	@GetMapping(value = {"/home"})
 	public String  home() {
-		
 		return "Api is running.Please follow api documentation for next procedure. ";
 	}
 

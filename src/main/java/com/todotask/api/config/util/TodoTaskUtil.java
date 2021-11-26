@@ -8,6 +8,17 @@ import com.todotask.api.response.ResponseDTO;
 public class TodoTaskUtil
 {
 
+	public static Boolean checkIfNull(String... arguments)
+	{
+		for (int i = 0; i < arguments.length; i++)
+		{
+			if (arguments[i] == null || arguments[i].equals(""))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 	public static ResponseDTO createResponseSuccess()
 	{
 		ResponseDTO responseDTO = new ResponseDTO();

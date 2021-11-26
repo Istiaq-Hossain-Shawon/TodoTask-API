@@ -1,10 +1,10 @@
-package com.geolocation.api;
+package com.todotask.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class GeolocationApplicationTests {
+class TodoTaskApplicationTests {
 
 	@Test
 	void contextLoads() {

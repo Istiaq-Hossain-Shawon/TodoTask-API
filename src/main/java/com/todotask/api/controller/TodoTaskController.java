@@ -60,6 +60,26 @@ public class TodoTaskController {
 			return TodoTaskUtil.createResponseFalied(e.getMessage());
 		}
 	}
+	@PostMapping(value = "/deleteTask")	
+	public ResponseDTO deleteTask(@RequestBody TodoTaskDto taskDTO)
+	{
+		if(taskDTO.getId()==0) {
+			logger.error("Task Id  is invalid.");			
+			return TodoTaskUtil.createResponseFalied("Task Id  is invalid.");
+		}		
+		
+		try
+		{
+			ResponseDTO responseDTO = todoTaskService.delete(taskDTO);
+			return responseDTO;
+		}
+		catch (Exception e)
+		{
+			logger.error(e.getMessage());
+			e.printStackTrace();
+			return TodoTaskUtil.createResponseFalied(e.getMessage());
+		}
+	}
 	
 	
 	@GetMapping(value = {"/home"})

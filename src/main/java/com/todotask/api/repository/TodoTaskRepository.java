@@ -20,4 +20,5 @@ public interface TodoTaskRepository extends JpaRepository<TotoTask,Integer> {
 	Page<TotoTask> findAll(Pageable pageable);
 	Page<TotoTask> findByIsDone(Optional<Boolean> isDone,Pageable pageable);
 	
+	
 }

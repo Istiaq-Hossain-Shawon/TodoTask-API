@@ -53,4 +53,14 @@ public class TodoTaskService {
 		ResponseDTO responseDTO = TodoTaskUtil.createResponseSuccess();
 		return responseDTO;
 	}
+	public ResponseDTO delete(TodoTaskDto taskDto) {		
+		Optional<TotoTask> check = todoTaskRepository.findById(taskDto.getId());
+		if(check.isEmpty()) {
+			return TodoTaskUtil.createResponseFalied("Invalid Task .Task does  not found.");
+		} else {			
+			todoTaskRepository.delete(check.get());
+		}
+		ResponseDTO responseDTO = TodoTaskUtil.createResponseSuccess();
+		return responseDTO;
+	}
 }

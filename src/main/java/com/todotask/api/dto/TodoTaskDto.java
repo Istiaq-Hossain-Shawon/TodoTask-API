@@ -1,6 +1,5 @@
 package com.todotask.api.dto;
 
-import com.todotask.api.model.Piority;
 
 public class TodoTaskDto {
 	

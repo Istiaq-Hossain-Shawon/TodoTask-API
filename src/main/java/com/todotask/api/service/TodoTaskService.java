@@ -1,15 +1,10 @@
 package com.todotask.api.service;
 
-
-import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
-import com.todotask.api.config.exception.ResourceAlreadyExistsException;
 import com.todotask.api.dto.TodoTaskDto;
 import com.todotask.api.model.Piority;
 import com.todotask.api.model.TotoTask;

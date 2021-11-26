@@ -1,15 +1,8 @@
 package com.todotask.api.service;
-
-
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
-
 import com.todotask.api.config.exception.ResourceAlreadyExistsException;
-import com.todotask.api.dto.TodoTaskDto;
 import com.todotask.api.model.Piority;
-import com.todotask.api.model.TotoTask;
 import com.todotask.api.repository.PiorityRepository;
 
 @Service

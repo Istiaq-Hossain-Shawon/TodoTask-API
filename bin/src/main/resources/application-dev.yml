@@ -1,0 +1,25 @@
+server:
+    port: 8095
+    servlet:
+      context-path: /geolocation
+ 
+spring:
+  h2:
+    console:
+      enabled: true
+
+logging:
+  level:
+    org.springframework.ws: DEBUG
+    org.apache.http: ERROR
+    javax.net: ERROR
+    sun.security.ssl: DEBUG
+    sun.net: ERROR   
+    com.geolocation: TRACE 
+    org.springframework.web: DEBUG
+    java.security: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE   
+    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
+    org.apache.http.wire: ERROR
+

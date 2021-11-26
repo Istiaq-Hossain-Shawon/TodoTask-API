@@ -43,14 +43,12 @@ public class TodotaskApplication {
     }
 	@PostConstruct
     public void initTodoTask() throws Exception {
-        List<TodoTaskDto> tasks = Stream.of(
-                new TodoTaskDto(1, "Task 1",false),
-                new TodoTaskDto(2, "Task 2",false),
-                new TodoTaskDto(3, "Task 3",false),
-                new TodoTaskDto(4, "Task 4",false),
-                new TodoTaskDto(5, "Task 5",false)	  
-        ).collect(Collectors.toList());
-        todoTaskService.saveAll(tasks);;
+        todoTaskService.save(new TodoTaskDto(1, "Task 1",false,new Piority(1, "low")));;
+        todoTaskService.save(new TodoTaskDto(2, "Task 2",false,new Piority(2, "medium")));;
+        todoTaskService.save(new TodoTaskDto(3, "Task 3",false,new Piority(3, "high")));;
+        todoTaskService.save(new TodoTaskDto(4, "Task 4",false,new Piority(1, "low")));;
+        todoTaskService.save(new TodoTaskDto(5, "Task 5",false,new Piority(1, "low")));;
+        
     }
 	
 	public static void main(String[] args) {

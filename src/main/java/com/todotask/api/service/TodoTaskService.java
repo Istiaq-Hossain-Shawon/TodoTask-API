@@ -22,17 +22,8 @@ public class TodoTaskService {
 		return todoTaskRepository.findAll();
 	}
 	
-	public void saveAll(List<TodoTaskDto> tasks) throws Exception {
-		tasks.forEach(task -> {
-			try {
-				save(task);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	    });
-	}
-	private void save(TodoTaskDto taskDto) throws Exception {
+
+	public void save(TodoTaskDto taskDto) throws Exception {
 		TotoTask check = todoTaskRepository.findByDescription(taskDto.getDescription());
 		if (check == null) {
 			var TotoTaskEntiry = new TotoTask();

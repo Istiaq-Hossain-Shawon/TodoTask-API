@@ -22,11 +22,6 @@ public class TotoTask {
 	private Boolean isDone;
 
 
-
-	public TotoTask(){
-		   
-	}
-
 	public String getDescription() {
 		return description;
 	}
@@ -56,6 +51,9 @@ public class TotoTask {
 
 	public void setPiority(Piority piority) {
 		this.piority = piority;
+	}
+	public TotoTask(){
+		   
 	}
 	
 }

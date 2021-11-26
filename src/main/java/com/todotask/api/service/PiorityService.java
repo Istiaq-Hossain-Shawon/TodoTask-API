@@ -26,6 +26,5 @@ public class PiorityService {
 		} else {
 			throw new ResourceAlreadyExistsException("This piority already existed");
 		}
-
 	}
 }

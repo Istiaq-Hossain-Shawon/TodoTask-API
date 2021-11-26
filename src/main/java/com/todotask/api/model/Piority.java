@@ -26,5 +26,7 @@ public class Piority {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	public Piority() {
+		super();
+	}
 }

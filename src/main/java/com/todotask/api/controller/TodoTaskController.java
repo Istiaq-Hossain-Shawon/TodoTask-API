@@ -13,9 +13,6 @@ import com.todotask.api.model.TotoTask;
 import com.todotask.api.service.TodoTaskService;
 
 
-
-
-
 @RestController
 public class TodoTaskController {
 	
@@ -34,9 +31,6 @@ public class TodoTaskController {
 		
 		return "Api is running.Please follow api documentation for next procedure. ";
 	}
-
-
-
 
 
 }

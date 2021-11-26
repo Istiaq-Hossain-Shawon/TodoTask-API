@@ -21,7 +21,7 @@ logging:
     javax.net: ERROR
     sun.security.ssl: DEBUG
     sun.net: ERROR   
-    com.geolocation: TRACE 
+    com.todotask: TRACE 
     org.springframework.web: DEBUG
     java.security: DEBUG
     org.hibernate.SQL: DEBUG

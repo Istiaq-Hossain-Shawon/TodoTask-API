@@ -37,18 +37,33 @@ public class TodotaskApplication {
     }
 	@PostConstruct
     public void initPiority() throws Exception {
-		piorityService.save(new Piority(1, "low"));
-		piorityService.save(new Piority(2, "medium"));
-		piorityService.save(new Piority(3, "high"));
+		if(piorityService.getPiorityByName("low")==null) {
+			piorityService.save(new Piority(1, "low"));
+		}
+		if(piorityService.getPiorityByName("medium")==null) {
+			piorityService.save(new Piority(2, "medium"));
+		}
+		if(piorityService.getPiorityByName("high")==null) {
+			piorityService.save(new Piority(3, "high"));
+		}
     }
 	@PostConstruct
     public void initTodoTask() throws Exception {
-        todoTaskService.save(new TodoTaskDto(1, "Task 1",false,new Piority(1, "low")));;
-        todoTaskService.save(new TodoTaskDto(2, "Task 2",false,new Piority(2, "medium")));;
-        todoTaskService.save(new TodoTaskDto(3, "Task 3",false,new Piority(3, "high")));;
-        todoTaskService.save(new TodoTaskDto(4, "Task 4",false,new Piority(1, "low")));;
-        todoTaskService.save(new TodoTaskDto(5, "Task 5",false,new Piority(1, "low")));;
-        
+		if(todoTaskService.findByDescription("Task 1")==null) {
+			todoTaskService.save(new TodoTaskDto(1, "Task 1",false,new Piority(1, "low")));
+		}
+		if(todoTaskService.findByDescription("Task 2")==null) {
+			 todoTaskService.save(new TodoTaskDto(2, "Task 2",false,new Piority(2, "medium")));
+		}
+		if(todoTaskService.findByDescription("Task 3")==null) {
+			todoTaskService.save(new TodoTaskDto(3, "Task 3",false,new Piority(3, "high")));;
+		}
+		if(todoTaskService.findByDescription("Task 4")==null) {
+			todoTaskService.save(new TodoTaskDto(4, "Task 4",false,new Piority(1, "low")));;
+		}
+		if(todoTaskService.findByDescription("Task 5")==null) {
+			todoTaskService.save(new TodoTaskDto(5, "Task 5",false,new Piority(1, "low")));;
+		}        
     }
 	
 	public static void main(String[] args) {

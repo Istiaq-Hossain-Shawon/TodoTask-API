@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.todotask.api.config.exception.ResourceAlreadyExistsException;
 import com.todotask.api.dto.TodoTaskDto;
+import com.todotask.api.model.Piority;
 import com.todotask.api.model.TotoTask;
 import com.todotask.api.repository.TodoTaskRepository;
 import org.springframework.data.domain.Page;
@@ -22,8 +23,11 @@ public class TodoTaskService {
 	private TodoTaskRepository todoTaskRepository;
 	public Page<TotoTask> getAll(Optional<Integer> page,Optional<String> sortBy) {		
 		return todoTaskRepository.findAll(PageRequest.of(page.orElse(0), 10,
-                        Sort.Direction.DESC, sortBy.orElse("questionId")));
-	}	
+                        Sort.Direction.DESC, sortBy.orElse("piorityId")));
+	}
+	public TotoTask findByDescription(String description) {
+		return  todoTaskRepository.findByDescription(description);
+	}
 
 	public void save(TodoTaskDto taskDto) throws Exception {
 		TotoTask check = todoTaskRepository.findByDescription(taskDto.getDescription());

@@ -41,7 +41,7 @@ public class TodotaskApplication {
                 new TodoTaskDto(4, "Comilla  District"),
                 new TodoTaskDto(5, "Tangail  District")	  
         ).collect(Collectors.toList());
-//        todoTaskService.saveAll(locations);
+
     }
 	
 	public static void main(String[] args) {

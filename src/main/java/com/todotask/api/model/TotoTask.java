@@ -19,6 +19,8 @@ public class TotoTask {
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "piorityId", nullable = false)
 	private Piority piority; 
+	
+	private Boolean isDone;
 
 	public int getId() {
 		return id;
@@ -34,6 +36,14 @@ public class TotoTask {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Boolean getIsDone() {
+		return isDone;
+	}
+
+	public void setIsDone(Boolean isDone) {
+		this.isDone = isDone;
 	}
 	
 	

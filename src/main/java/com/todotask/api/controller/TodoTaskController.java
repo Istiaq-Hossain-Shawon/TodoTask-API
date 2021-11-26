@@ -38,13 +38,13 @@ public class TodoTaskController {
 	 private TodoTaskService todoTaskService;
 	 private final Logger logger = LoggerFactory.getLogger(TodoTaskController.class);
 	
-	@GetMapping(value = "/todo-tasks")
+	@GetMapping(value = "/todoTasks")
 	public Page<TotoTask>  todoTask(@RequestParam(value = "page") Optional<Integer> page,@RequestParam(value = "size") Integer size) {
 		Page<TotoTask> data=todoTaskService.getAll(page,size);
 		return data;
 	}	
 	
-	@PostMapping(value = "/SaveTask")	
+	@PostMapping(value = "/saveTask")	
 	public ResponseDTO beftnTransactionSingle(@RequestBody TodoTaskDto taskDTO, Principal principal)
 	{
 		try

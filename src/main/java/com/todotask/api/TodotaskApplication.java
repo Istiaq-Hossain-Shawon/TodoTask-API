@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.todotask.api.dto.TodoTaskDto;
+import com.todotask.api.model.Piority;
 import com.todotask.api.model.User;
 import com.todotask.api.repository.UserRepository;
 import com.todotask.api.service.TodoTaskService;
@@ -34,13 +35,15 @@ public class TodotaskApplication {
     }
 	@PostConstruct
     public void initTodoTask() throws Exception {
-        List<TodoTaskDto> locations = Stream.of(
-                new TodoTaskDto(1, "Mohakhali, Dhaka, Bangladesh"),
-                new TodoTaskDto(2, "Barisal District"),
-                new TodoTaskDto(3, "Chittagong District"),
-                new TodoTaskDto(4, "Comilla  District"),
-                new TodoTaskDto(5, "Tangail  District")	  
+        List<TodoTaskDto> tasks = Stream.of(
+                new TodoTaskDto(1, "Task 1",false),
+                new TodoTaskDto(2, "Task 2",false),
+                new TodoTaskDto(3, "Task 3",false),
+                new TodoTaskDto(4, "Task 4",false),
+                new TodoTaskDto(5, "Task 5",false)	  
         ).collect(Collectors.toList());
+        todoTaskService.saveAll(tasks);;
+        
 
     }
 	

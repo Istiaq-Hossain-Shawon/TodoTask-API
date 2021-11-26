@@ -14,6 +14,8 @@ public class TotoTask {
 	@Id
 	private int id;
 
+	
+
 	private String description;
 
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
@@ -22,9 +24,7 @@ public class TotoTask {
 	
 	private Boolean isDone;
 
-	public int getId() {
-		return id;
-	}
+
 
 	public TotoTask(){
 		   
@@ -45,6 +45,20 @@ public class TotoTask {
 	public void setIsDone(Boolean isDone) {
 		this.isDone = isDone;
 	}
-	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Piority getPiority() {
+		return piority;
+	}
+
+	public void setPiority(Piority piority) {
+		this.piority = piority;
+	}
 	
 }

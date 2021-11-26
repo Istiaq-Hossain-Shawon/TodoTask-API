@@ -7,6 +7,7 @@ import com.todotask.api.dto.TodoTaskDto;
 import com.todotask.api.model.Piority;
 import com.todotask.api.model.User;
 import com.todotask.api.repository.UserRepository;
+import com.todotask.api.service.PiorityService;
 import com.todotask.api.service.TodoTaskService;
 
 import javax.annotation.PostConstruct;
@@ -19,12 +20,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class TodotaskApplication {
 
-	 @Autowired
-	 private UserRepository repository;
+	@Autowired
+	private UserRepository repository;
 	 
-	 @Autowired
-	 private TodoTaskService todoTaskService;
-	 
+	@Autowired
+	private TodoTaskService todoTaskService;
+	@Autowired
+	private PiorityService piorityService;
 	@PostConstruct
     public void initUsers() {
         List<User> users = Stream.of(
@@ -32,6 +34,12 @@ public class TodotaskApplication {
                 new User(102, "user2", "654321", "user2@gmail.com")	                
         ).collect(Collectors.toList());
         repository.saveAll(users);
+    }
+	@PostConstruct
+    public void initPiority() throws Exception {
+		piorityService.save(new Piority(1, "low"));
+		piorityService.save(new Piority(2, "medium"));
+		piorityService.save(new Piority(3, "high"));
     }
 	@PostConstruct
     public void initTodoTask() throws Exception {
@@ -43,8 +51,6 @@ public class TodotaskApplication {
                 new TodoTaskDto(5, "Task 5",false)	  
         ).collect(Collectors.toList());
         todoTaskService.saveAll(tasks);;
-        
-
     }
 	
 	public static void main(String[] args) {

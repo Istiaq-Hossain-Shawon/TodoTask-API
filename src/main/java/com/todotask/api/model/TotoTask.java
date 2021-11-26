@@ -13,9 +13,6 @@ public class TotoTask {
 
 	@Id
 	private int id;
-
-	
-
 	private String description;
 
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)

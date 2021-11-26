@@ -12,6 +12,13 @@ public class Piority {
 
 	private String name;
 
+	public Piority(int id, String name) {
+		super();
+		this.piorityId=id;
+		this.setName(name);
+	}
+	
+
 	public String getName() {
 		return name;
 	}

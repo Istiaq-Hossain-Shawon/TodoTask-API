@@ -39,9 +39,9 @@ public class TodoTaskDto {
 		this.description = description;
 	} 
 
-	public TodoTaskDto(int i, String description,Boolean isDone) {
+	public TodoTaskDto(int id, String description,Boolean isDone) {
 		super();
-		this.id = i;
+		this.id = id;
 		this.setDescription(description);
 		this.setIsDone(isDone);
 		

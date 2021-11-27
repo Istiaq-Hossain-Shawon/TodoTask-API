@@ -59,7 +59,7 @@ Maven > Update Project...
 
 ## Api Documentation
 
-This include 6 api endpoints.These are:
+This include 7 api endpoints.These are:
 
 #### 1.todotask/requesttoken[POST]
  * **Url**:
@@ -131,7 +131,7 @@ http://localhost:8095/todotask/todoTasks?page=0&size=10
  ```
 
 
-#### 3.Get Only Done Task :todotask/todoTasks?page=0&size=10&isDone=true [GET]
+#### 3.Get Only Done Task : todotask/todoTasks?page=0&size=10&isDone=true [GET]
 
 * **Url**:
 ```
@@ -162,7 +162,7 @@ http://localhost:8095/todotask/todoTasks?page=0&size=10&isDone=true
  
  
 
-#### 4.Get Single Task  :/todoTask?id= [GET]
+#### 4.Get Single Task : /todoTask?id= [GET]
 
 * **Url**:
 ```
@@ -195,7 +195,7 @@ http://localhost:8095/todotask/todoTask?id=8
  
  
 
-#### 5.Update Task :todotask/AddTask [POST]
+#### 5.Update Task : todotask/AddTask [POST]
 
 * **Url**:
 ```
@@ -229,7 +229,7 @@ http://localhost:8095/todotask/AddTask
 
 ```
 
-#### 6.Update Task Status :todotask/updateTask [POST]
+#### 6.Update Task Status : todotask/updateTask [POST]
 
 * **Url**:
 ```
@@ -265,7 +265,7 @@ http://localhost:8095/todotask/updateTask
 
  ```
 
-#### 7.Delete  Task Status :todotask/deleteTask [POST]
+#### 7.Delete  Task Status : todotask/deleteTask [POST]
 
 * **Url**:
 ```

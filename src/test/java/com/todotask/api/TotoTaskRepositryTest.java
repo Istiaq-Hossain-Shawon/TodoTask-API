@@ -48,6 +48,15 @@ class TotoTaskRepositryTest {
 
 	        Assertions.assertThat(todoTask.getId()).isGreaterThan(0);
 	    }
+	    @Test
+	    @Order(3)
+	    public void getTodoTaskTest(){
+
+	    	TotoTask totoTask = totoTaskRepository.findById(1).get();
+
+	        Assertions.assertThat(totoTask.getId()).isEqualTo(1);
+
+	    }
 	    
 
 }

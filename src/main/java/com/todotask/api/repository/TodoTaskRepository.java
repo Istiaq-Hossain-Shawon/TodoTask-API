@@ -1,6 +1,7 @@
 package com.todotask.api.repository;
 
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -16,7 +17,7 @@ import com.todotask.api.model.TodoTask;
 @Transactional
 @Repository
 public interface TodoTaskRepository extends JpaRepository<TodoTask,Integer> {
-	TodoTask findByDescription(String description);
+	List<TodoTask> findByDescription(String description);
 	Page<TodoTask> findAll(Pageable pageable);
 	Page<TodoTask> findByIsDone(Optional<Boolean> isDone,Pageable pageable);
 	void saveAndFlush(Optional<TodoTask> check);

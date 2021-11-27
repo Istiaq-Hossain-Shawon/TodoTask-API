@@ -59,7 +59,7 @@ public class TodoTaskService {
 	}
 	
 	public TodoTask findByDescription(String description) {
-		return  todoTaskRepository.findByDescription(description);
+		return  todoTaskRepository.findByDescription(description).get(0);
 	}
 	public ResponseDTO findById(int id) {
 		var data =todoTaskRepository.findById(id);

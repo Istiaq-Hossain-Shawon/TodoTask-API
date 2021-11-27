@@ -68,6 +68,20 @@ class TotoTaskRepositryTest {
 	        Assertions.assertThat(totoTasks.size()).isGreaterThan(0);
 
 	    }
+	    @Test
+	    @Order(5)
+	    @Rollback(value = false)
+	    public void updateTodoTaskTest(){
+
+	    	TotoTask totoTask = totoTaskRepository.findById(1).get();
+
+	    	totoTask.setDescription("Updated Task");;
+
+	    	TotoTask totoTaskUpdated =  totoTaskRepository.save(totoTask);
+
+	        Assertions.assertThat(totoTaskUpdated.getDescription()).isEqualTo("Updated Task");
+
+	    }
 	    
 
 }

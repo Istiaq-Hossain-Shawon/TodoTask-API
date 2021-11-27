@@ -29,4 +29,14 @@ public class Piority {
 	public Piority() {
 		super();
 	}
+
+
+	public int getPiorityId() {
+		return piorityId;
+	}
+
+
+	public void setPiorityId(int piorityId) {
+		this.piorityId = piorityId;
+	}
 }

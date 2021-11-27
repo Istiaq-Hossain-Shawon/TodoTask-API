@@ -1,11 +1,14 @@
 package com.todotask.api;
 
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
@@ -14,9 +17,11 @@ import com.todotask.api.model.Piority;
 import com.todotask.api.model.TotoTask;
 import com.todotask.api.repository.PiorityRepository;
 import com.todotask.api.repository.TodoTaskRepository;
+import org.junit.jupiter.api.MethodOrderer;
 
 
 @SpringBootTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class TotoTaskRepositryTest {
 	    @Autowired
 	    private TodoTaskRepository totoTaskRepository;
@@ -43,11 +48,14 @@ class TotoTaskRepositryTest {
 	    public void saveTodoTaskTest(){
 
 	    	TotoTask todoTask =new TotoTask();
+	    	
 	    	todoTask.setDescription("Task 123");
 	    	todoTask.setIsDone(false);
 	    	todoTask.setPiority(piorityRepository.findByName("low"));
 	    	totoTaskRepository.save(todoTask);
-
+	    	System.out.println("INSERTED TASK:");
+	    	System.out.println(todoTask);
+	    	System.out.println(todoTask.getId());
 	        Assertions.assertThat(todoTask.getId()).isGreaterThan(0);
 	    }
 	    @Test
@@ -64,6 +72,11 @@ class TotoTaskRepositryTest {
 	    public void getListOfTaskTest(){
 
 	        List<TotoTask> totoTasks = totoTaskRepository.findAll();
+	        System.out.println("GET TASKS:");
+	        for(TotoTask model : totoTasks) {
+	            System.out.println(model.getId());
+	            System.out.println(model.getDescription());
+	        }
 
 	        Assertions.assertThat(totoTasks.size()).isGreaterThan(0);
 
@@ -81,6 +94,25 @@ class TotoTaskRepositryTest {
 
 	        Assertions.assertThat(totoTaskUpdated.getDescription()).isEqualTo("Updated Task");
 
+	    }
+	    @Test
+	    @Order(6)
+	    @Rollback(value = false)
+	    public void deleteEmployeeTest(){
+
+	    	TotoTask todotask = totoTaskRepository.findById(1).get();
+
+	    	totoTaskRepository.delete(todotask);	        
+
+	        TotoTask todotask1 = null;
+
+	        Optional<TotoTask> optionaltask = totoTaskRepository.findById(1);
+
+	        if(optionaltask.isPresent()){
+	        	todotask1 = optionaltask.get();
+	        }
+
+	        Assertions.assertThat(todotask1).isNull();
 	    }
 	    
 

@@ -47,17 +47,15 @@ class TotoTaskRepositryTest {
 	    @Rollback(value = false)
 	    public void saveTodoTaskTest(){
 
-	    	TotoTask todoTask =new TotoTask();
-	    	
+	    	TotoTask todoTask =new TotoTask();	    	
 	    	todoTask.setDescription("Task 123");
 	    	todoTask.setIsDone(false);
 	    	todoTask.setPiority(piorityRepository.findByName("low"));
 	    	totoTaskRepository.save(todoTask);
-	    	System.out.println("INSERTED TASK:");
-	    	System.out.println(todoTask);
 	    	System.out.println(todoTask.getId());
 	        Assertions.assertThat(todoTask.getId()).isGreaterThan(0);
 	    }
+	 // JUnit test for get single task by id
 	    @Test
 	    @Order(3)
 	    public void getTodoTaskTest(){
@@ -67,20 +65,17 @@ class TotoTaskRepositryTest {
 	        Assertions.assertThat(totoTask.getId()).isEqualTo(1);
 
 	    }
+	 // JUnit test for get all task list
 	    @Test
 	    @Order(4)
 	    public void getListOfTaskTest(){
 
-	        List<TotoTask> totoTasks = totoTaskRepository.findAll();
-	        System.out.println("GET TASKS:");
-	        for(TotoTask model : totoTasks) {
-	            System.out.println(model.getId());
-	            System.out.println(model.getDescription());
-	        }
+	        List<TotoTask> totoTasks = totoTaskRepository.findAll();	        
 
 	        Assertions.assertThat(totoTasks.size()).isGreaterThan(0);
 
 	    }
+	 // JUnit test for update task
 	    @Test
 	    @Order(5)
 	    @Rollback(value = false)
@@ -95,10 +90,11 @@ class TotoTaskRepositryTest {
 	        Assertions.assertThat(totoTaskUpdated.getDescription()).isEqualTo("Updated Task");
 
 	    }
+	 // JUnit test for delete task
 	    @Test
 	    @Order(6)
 	    @Rollback(value = false)
-	    public void deleteEmployeeTest(){
+	    public void deleteTodoTaskTest(){
 
 	    	TotoTask todotask = totoTaskRepository.findById(1).get();
 

@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
 import com.todotask.api.model.Piority;
-import com.todotask.api.model.TotoTask;
+import com.todotask.api.model.TodoTask;
 import com.todotask.api.repository.PiorityRepository;
 import com.todotask.api.repository.TodoTaskRepository;
 

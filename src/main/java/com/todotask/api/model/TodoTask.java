@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="todotask_tbl")
-public class TotoTask {
+public class TodoTask {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -63,7 +63,7 @@ public class TotoTask {
 	public void setPiority(Piority piority) {
 		this.piority = piority;
 	}
-	public TotoTask(){
+	public TodoTask(){
 		   
 	}
 	

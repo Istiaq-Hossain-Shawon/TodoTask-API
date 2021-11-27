@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.todotask.api.config.util.TodoTaskUtil;
 import com.todotask.api.dto.TodoTaskDto;
 import com.todotask.api.model.Piority;
-import com.todotask.api.model.TotoTask;
+import com.todotask.api.model.TodoTask;
 import com.todotask.api.repository.PiorityRepository;
 import com.todotask.api.repository.TodoTaskRepository;
 import com.todotask.api.response.ResponseDTO;
@@ -29,7 +29,7 @@ public class TodoTaskService {
 	
 	public ResponseDTO getAll(Optional<Integer> page,Integer size,Optional<Boolean> isDone ) {	
 		
-		Page<TotoTask> tasks;
+		Page<TodoTask> tasks;
 		if(isDone.isEmpty()) {
 			tasks= todoTaskRepository.findAll(PageRequest.of(page.orElse(0),size,Sort.by(Sort.Direction.DESC, "piority")));
 		}else {
@@ -38,7 +38,7 @@ public class TodoTaskService {
 		return ConvertDataTodoTaskResponseDTO(tasks);
 		
 	}
-	private ResponseDTO ConvertDataTodoTaskResponseDTO(Page<TotoTask> data)	{
+	private ResponseDTO ConvertDataTodoTaskResponseDTO(Page<TodoTask> data)	{
 		ResponseDTO responseDto= new ResponseDTO();
 		List<TodoTaskDto> taskDtoList= new ArrayList<TodoTaskDto>();
 		data.getContent().forEach(task -> {
@@ -58,7 +58,7 @@ public class TodoTaskService {
 		return responseDto;		
 	}
 	
-	public TotoTask findByDescription(String description) {
+	public TodoTask findByDescription(String description) {
 		return  todoTaskRepository.findByDescription(description);
 	}
 	public ResponseDTO findById(int id) {
@@ -82,7 +82,7 @@ public class TodoTaskService {
 
 	public ResponseDTO save(TodoTaskDto taskDto) {
 		
-		var TotoTaskEntiry = new TotoTask();
+		var TotoTaskEntiry = new TodoTask();
 		BeanUtils.copyProperties(taskDto, TotoTaskEntiry);
 		Piority piority=piorityRepository.findByName(taskDto.getPiorityName());
 		if(piority==null) {
@@ -104,7 +104,7 @@ public class TodoTaskService {
 		if(piority==null) {
 			return TodoTaskUtil.createResponseFalied("Invalid Piority Name.");
 		}
-		Optional<TotoTask> check = todoTaskRepository.findById(taskDto.getId());
+		Optional<TodoTask> check = todoTaskRepository.findById(taskDto.getId());
 		if (check.isEmpty()) {
 			return TodoTaskUtil.createResponseFalied("Task Not found.");	
 		} else {
@@ -120,7 +120,7 @@ public class TodoTaskService {
 		return responseDTO;
 	}
 	public ResponseDTO delete(TodoTaskDto taskDto) {		
-		Optional<TotoTask> check = todoTaskRepository.findById(taskDto.getId());
+		Optional<TodoTask> check = todoTaskRepository.findById(taskDto.getId());
 		if(check.isEmpty()) {
 			return TodoTaskUtil.createResponseFalied("Invalid Task .Task does  not found.");
 		} else {			

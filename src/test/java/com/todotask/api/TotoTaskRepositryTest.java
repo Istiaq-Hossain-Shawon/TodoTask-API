@@ -14,7 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
 import com.todotask.api.model.Piority;
-import com.todotask.api.model.TotoTask;
+import com.todotask.api.model.TodoTask;
 import com.todotask.api.repository.PiorityRepository;
 import com.todotask.api.repository.TodoTaskRepository;
 import org.junit.jupiter.api.MethodOrderer;
@@ -47,7 +47,7 @@ class TotoTaskRepositryTest {
 	    @Rollback(value = false)
 	    public void saveTodoTaskTest(){
 
-	    	TotoTask todoTask =new TotoTask();	    	
+	    	TodoTask todoTask =new TodoTask();	    	
 	    	todoTask.setDescription("Task 123");
 	    	todoTask.setIsDone(false);
 	    	todoTask.setPiority(piorityRepository.findByName("low"));
@@ -60,7 +60,7 @@ class TotoTaskRepositryTest {
 	    @Order(3)
 	    public void getTodoTaskTest(){
 
-	    	TotoTask totoTask = totoTaskRepository.findById(1).get();
+	    	TodoTask totoTask = totoTaskRepository.findById(1).get();
 
 	        Assertions.assertThat(totoTask.getId()).isEqualTo(1);
 
@@ -70,7 +70,7 @@ class TotoTaskRepositryTest {
 	    @Order(4)
 	    public void getListOfTaskTest(){
 
-	        List<TotoTask> totoTasks = totoTaskRepository.findAll();	        
+	        List<TodoTask> totoTasks = totoTaskRepository.findAll();	        
 
 	        Assertions.assertThat(totoTasks.size()).isGreaterThan(0);
 
@@ -81,11 +81,11 @@ class TotoTaskRepositryTest {
 	    @Rollback(value = false)
 	    public void updateTodoTaskTest(){
 
-	    	TotoTask totoTask = totoTaskRepository.findById(1).get();
+	    	TodoTask totoTask = totoTaskRepository.findById(1).get();
 
 	    	totoTask.setDescription("Updated Task");;
 
-	    	TotoTask totoTaskUpdated =  totoTaskRepository.save(totoTask);
+	    	TodoTask totoTaskUpdated =  totoTaskRepository.save(totoTask);
 
 	        Assertions.assertThat(totoTaskUpdated.getDescription()).isEqualTo("Updated Task");
 
@@ -96,13 +96,13 @@ class TotoTaskRepositryTest {
 	    @Rollback(value = false)
 	    public void deleteTodoTaskTest(){
 
-	    	TotoTask todotask = totoTaskRepository.findById(1).get();
+	    	TodoTask todotask = totoTaskRepository.findById(1).get();
 
 	    	totoTaskRepository.delete(todotask);	        
 
-	        TotoTask todotask1 = null;
+	        TodoTask todotask1 = null;
 
-	        Optional<TotoTask> optionaltask = totoTaskRepository.findById(1);
+	        Optional<TodoTask> optionaltask = totoTaskRepository.findById(1);
 
 	        if(optionaltask.isPresent()){
 	        	todotask1 = optionaltask.get();

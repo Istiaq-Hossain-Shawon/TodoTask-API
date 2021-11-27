@@ -10,7 +10,9 @@ public class Piority {
 	@Id
 	private int piorityId;
 
-	private String name;
+	private String name;	
+	
+	
 
 	public Piority(int id, String name) {
 		super();
@@ -39,4 +41,6 @@ public class Piority {
 	public void setPiorityId(int piorityId) {
 		this.piorityId = piorityId;
 	}
+
+	
 }

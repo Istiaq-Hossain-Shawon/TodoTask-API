@@ -1,6 +1,9 @@
 package com.todotask.api.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.todotask.api.config.util.TodoTaskUtil;
 import com.todotask.api.dto.TodoTaskDto;
-import com.todotask.api.model.TotoTask;
 import com.todotask.api.response.ResponseDTO;
 import com.todotask.api.service.TodoTaskService;
 
@@ -26,14 +28,18 @@ public class TodoTaskController {
 	 private final Logger logger = LoggerFactory.getLogger(TodoTaskController.class);
 	
 	@GetMapping(value = "/todoTasks")
-	public Page<TotoTask>  todoTask(@RequestParam(value = "page") Optional<Integer> page,@RequestParam(value = "size") Integer size,
+	public ResponseDTO  todoTasks(@RequestParam(value = "page") Optional<Integer> page,@RequestParam(value = "size") Integer size,
 			@RequestParam(value = "isDone") Optional<Boolean> isDone) {
-		Page<TotoTask> data=todoTaskService.getAll(page,size,isDone);
-		return data;
-	}	
+		return todoTaskService.getAll(page,size,isDone);
+	}
 	
-	@PostMapping(value = "/saveTask")	
-	public ResponseDTO saveTask(@RequestBody TodoTaskDto taskDTO)
+	@GetMapping(value = "/todoTask")
+	public ResponseDTO  todoTask(@RequestParam(value = "id")  Integer id) {
+		return todoTaskService.findById(id);
+	}
+	
+	@PostMapping(value = "/AddTask")	
+	public ResponseDTO AddTask(@RequestBody TodoTaskDto taskDTO,Principal principal)
 	{
 		if(TodoTaskUtil.checkIfNull(taskDTO.getDescription())) {
 			logger.error("Description is mendatory.");			
@@ -47,10 +53,43 @@ public class TodoTaskController {
 			logger.error("Task status is mendatory.");			
 			return TodoTaskUtil.createResponseFalied("Task status is mendatory.");
 		}
+		taskDTO.setCreatedBy(principal.getName());
 		
 		try
 		{
 			ResponseDTO responseDTO = todoTaskService.save(taskDTO);
+			return responseDTO;
+		}
+		catch (Exception e)
+		{
+			logger.error(e.getMessage());
+			e.printStackTrace();
+			return TodoTaskUtil.createResponseFalied(e.getMessage());
+		}
+	}
+	@PostMapping(value = "/updateTask")	
+	public ResponseDTO updateTask(@RequestBody TodoTaskDto taskDTO)
+	{
+		if(TodoTaskUtil.checkIfNull(taskDTO.getDescription())) {
+			logger.error("Description is mendatory.");			
+			return TodoTaskUtil.createResponseFalied("Description is mendatory.");
+		}
+		if(TodoTaskUtil.checkIfNull(taskDTO.getPiorityName())) {
+			logger.error("Piority Name is mendatory.");			
+			return TodoTaskUtil.createResponseFalied("Piority Name is mendatory.");
+		}
+		if((taskDTO.getIsDone())==null) {
+			logger.error("Task status is mendatory.");			
+			return TodoTaskUtil.createResponseFalied("Task status is mendatory.");
+		}
+		if((taskDTO.getId())==0) {
+			logger.error("Task Id is mendatory.");			
+			return TodoTaskUtil.createResponseFalied("Task Id is mendatory.");
+		}
+		
+		try
+		{
+			ResponseDTO responseDTO = todoTaskService.update(taskDTO);
 			return responseDTO;
 		}
 		catch (Exception e)

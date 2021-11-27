@@ -23,7 +23,15 @@ public class TotoTask {
 	private Piority piority; 
 	
 	private Boolean isDone;
+	
+	private String createdBy;
+	public String getCreatedBy() {
+		return createdBy;
+	}
 
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
 
 	public String getDescription() {
 		return description;

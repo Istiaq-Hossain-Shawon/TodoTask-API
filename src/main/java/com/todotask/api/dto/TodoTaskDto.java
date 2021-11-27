@@ -38,12 +38,18 @@ public class TodoTaskDto {
 		this.description = description;
 	} 
 
-	public TodoTaskDto(int id, String description,Boolean isDone,String piorityName) {
+	public TodoTaskDto(int id, String description,Boolean isDone,String piorityName,String createdBy) {
 		super();
 		this.id = id;
 		this.setDescription(description);
 		this.setIsDone(isDone);
 		this.setPiorityName(piorityName);
+		this.setCreatedBy(createdBy);
+		
+		
+	}
+	public TodoTaskDto() {
+		
 		
 		
 	}

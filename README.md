@@ -93,69 +93,39 @@ http://localhost:8095/todotask/todoTasks?page=0&size=10
  * **Response**:
  ```
  {
-    "content": [
+    "payload": [
         {
-            "id": 2,
-            "description": "Task 2",
-            "piority": {
-                "piorityId": 3,
-                "name": "high"
-            },
-            "isDone": false
+            "id": 17,
+            "description": "Task 12234",
+            "isDone": true,
+            "piorityName": "high",
+            "createdBy": "user1"
+        },
+        {
+            "id": 18,
+            "description": "Task ABC34",
+            "isDone": true,
+            "piorityName": "high",
+            "createdBy": "user1"
         },
         {
             "id": 5,
             "description": "Task 5",
-            "piority": {
-                "piorityId": 3,
-                "name": "high"
-            },
-            "isDone": false
+            "isDone": false,
+            "piorityName": "high",
+            "createdBy": null
         },
         {
-            "id": 4,
-            "description": "Task 4",
-            "piority": {
-                "piorityId": 2,
-                "name": "medium"
-            },
-            "isDone": false
-        },
-        {
-            "id": 3,
-            "description": "Task 3",
-            "piority": {
-                "piorityId": 1,
-                "name": "low"
-            },
-            "isDone": false
+            "id": 6,
+            "description": "Task 1234",
+            "isDone": true,
+            "piorityName": "high",
+            "createdBy": null
         }
     ],
-    "pageable": {
-        "sort": {
-            "sorted": true,
-            "unsorted": false,
-            "empty": false
-        },
-        "offset": 0,
-        "pageNumber": 0,
-        "pageSize": 10,
-        "paged": true,
-        "unpaged": false
-    },
-    "last": true,
-    "totalPages": 1,
-    "totalElements": 4,
-    "size": 10,
-    "number": 0,
-    "sort": {
-        "sorted": true,
-        "unsorted": false,
-        "empty": false
-    },
-    "first": true,
-    "numberOfElements": 4,
-    "empty": false
+    "pageSize": 10,
+    "pageNumber": 0,
+    "totalElements": 4
 }
 
  ```
@@ -172,57 +142,68 @@ http://localhost:8095/todotask/todoTasks?page=0&size=10&isDone=true
  * **Response**:
  ```
  {
-    "content": [
+    "payload": [
         {
             "id": 6,
             "description": "Task 1234",
-            "piority": {
-                "piorityId": 3,
-                "name": "high"
-            },
-            "isDone": true
+            "isDone": true,
+            "piorityName": "high",
+            "createdBy": "user1"
         }
     ],
-    "pageable": {
-        "sort": {
-            "sorted": true,
-            "unsorted": false,
-            "empty": false
-        },
-        "offset": 0,
-        "pageNumber": 0,
-        "pageSize": 10,
-        "paged": true,
-        "unpaged": false
-    },
-    "last": true,
-    "totalPages": 1,
-    "totalElements": 1,
-    "size": 10,
-    "number": 0,
-    "sort": {
-        "sorted": true,
-        "unsorted": false,
-        "empty": false
-    },
-    "first": true,
-    "numberOfElements": 1,
-    "empty": false
+    "pageSize": 10,
+    "pageNumber": 0,
+    "totalElements": 1
 }
 
  ```
  
  
+ 
+ 
 
-#### 4.Update Task :todotask/saveTask [POST]
+#### 4.Get Single Task  :/todoTask?id= [GET]
 
 * **Url**:
 ```
-http://localhost:8095/todotask/saveTask
+http://localhost:8095/todotask/todoTask?id=8
+```
+ * **Body**:
+ ```{}
+```
+   
+ * **Add Bearer Token from previous api in Authorization**:
+ * **Response**:
+ ```
+{
+    "errorcode": 0,
+    "errormsg": "SUCCESS",
+    "requesttimestamp": "27/11/2021 18:18:27",
+    "payload": [
+        {
+            "id": 8,
+            "description": "Task 2",
+            "isDone": false,
+            "piorityName": "high",
+            "createdBy": "user1"
+            
+        }
+    ]
+}
+
+```
+ 
+ 
+
+#### 5.Update Task :todotask/AddTask [POST]
+
+* **Url**:
+```
+http://localhost:8095/todotask/AddTask
 ```
  * **Body**:
  ```{
-   "description":"Task 1234",
+   "description":"Task 11222234",
    "isDone": false,
    "piorityName":"high"
 }
@@ -234,22 +215,32 @@ http://localhost:8095/todotask/saveTask
  {
     "errorcode": 0,
     "errormsg": "SUCCESS",
-    "requesttimestamp": "27/11/2021 12:38:34"
+    "requesttimestamp": "27/11/2021 18:35:17",
+    "payload": [
+        {
+            "id": 13,
+            "description": "Task 11222234",
+            "isDone": true,
+            "piorityName": "high",
+            "createdBy": "user1"
+        }
+    ]
 }
 
 ```
 
-#### 5.Update Task Status :todotask/saveTask [POST]
+#### 6.Update Task Status :todotask/updateTask [POST]
 
 * **Url**:
 ```
-http://localhost:8095/todotask/saveTask
+http://localhost:8095/todotask/updateTask
 ```
  * **Body**:
  ```{
-   "description":"Task 1234",
+   "description":"Task 12234",
    "isDone": true,
-   "piorityName":"high"
+   "piorityName":"high",
+   "id":12
 }
 ```
    
@@ -259,13 +250,22 @@ http://localhost:8095/todotask/saveTask
  {
     "errorcode": 0,
     "errormsg": "SUCCESS",
-    "requesttimestamp": "27/11/2021 12:38:34"
+    "requesttimestamp": "27/11/2021 18:33:10",
+    "payload": [
+        {
+            "id": 12,
+            "description": "Task 12234",
+            "isDone": true,
+            "piorityName": "high",
+            "createdBy": null
+        }
+    ]
 }
 
 
  ```
 
-#### 6.Delete  Task Status :todotask/deleteTask [POST]
+#### 7.Delete  Task Status :todotask/deleteTask [POST]
 
 * **Url**:
 ```

@@ -204,11 +204,11 @@ http://localhost:8095/todotask/todoTask?id=8
  
  
 
-#### 5.Update Task : todotask/AddTask [POST]
+#### 5.Update Task : todotask/addTask [POST]
 
 * **Url**:
 ```
-http://localhost:8095/todotask/AddTask
+http://localhost:8095/todotask/addTask
 ```
  * **Body**:
  ```{

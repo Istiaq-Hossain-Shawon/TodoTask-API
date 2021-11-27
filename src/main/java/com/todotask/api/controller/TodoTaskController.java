@@ -38,7 +38,7 @@ public class TodoTaskController {
 		return todoTaskService.findById(id);
 	}
 	
-	@PostMapping(value = "/AddTask")	
+	@PostMapping(value = "/addTask")	
 	public ResponseDTO AddTask(@RequestBody TodoTaskDto taskDTO,Principal principal)
 	{
 		if(TodoTaskUtil.checkIfNull(taskDTO.getDescription())) {

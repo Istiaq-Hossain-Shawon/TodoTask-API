@@ -1,6 +1,8 @@
 package com.todotask.api;
 
 
+import java.util.List;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -55,6 +57,15 @@ class TotoTaskRepositryTest {
 	    	TotoTask totoTask = totoTaskRepository.findById(1).get();
 
 	        Assertions.assertThat(totoTask.getId()).isEqualTo(1);
+
+	    }
+	    @Test
+	    @Order(4)
+	    public void getListOfTaskTest(){
+
+	        List<TotoTask> totoTasks = totoTaskRepository.findAll();
+
+	        Assertions.assertThat(totoTasks.size()).isGreaterThan(0);
 
 	    }
 	    

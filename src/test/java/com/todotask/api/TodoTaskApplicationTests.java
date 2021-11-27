@@ -169,6 +169,58 @@ class TodoTaskApplicationTests {
 				&& response.getPayload().get(0).getDescription().equals(responseDtoUpdatedEntity.getPayload().get(0).getDescription()));
 			
 	}
+	
+
+	@Test
+	public void getTaskByIdTest() throws Exception {
+		
+		int id=3;
+		
+		String JsonRequest = objectMapper.writeValueAsString("");
+		
+		String token=getToken();
+		
+		MvcResult result = mockMvc.perform(get("/todoTask")
+				.header(HttpHeaders.AUTHORIZATION, "Bearer "+token)
+				.param("id", id+"")
+				.content(JsonRequest).contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andExpect(status().isOk()).andReturn();
+		
+		String resultContext = result.getResponse().getContentAsString();
+		
+		ResponseDTO response = objectMapper.readValue(resultContext, ResponseDTO.class);
+		
+		Assert.assertTrue(response.getErrorcode() == 0 && response.getPayload().get(0).getId()==id);
+			
+	}
+	
+
+	@Test
+	public void deleteTaskByIdTest() throws Exception {
+		
+		int id=5;
+		
+		TodoTaskDto taskDto= new TodoTaskDto();
+		taskDto.setId(id);
+		
+		String JsonRequest = objectMapper.writeValueAsString(taskDto);
+		
+		String token=getToken();
+		
+		MvcResult result = mockMvc.perform(post("/deleteTask")
+				.header(HttpHeaders.AUTHORIZATION, "Bearer "+token)
+				.content(JsonRequest).contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andExpect(status().isOk()).andReturn();
+		
+		String resultContext = result.getResponse().getContentAsString();
+		
+		ResponseDTO response = objectMapper.readValue(resultContext, ResponseDTO.class);
+		
+		Assert.assertTrue(response.getErrorcode() == 0);
+			
+	}
+	
+	
 	private String getToken() throws Exception {
 		AuthenticationRequest user = new AuthenticationRequest();
 		user.setUsername("user1");

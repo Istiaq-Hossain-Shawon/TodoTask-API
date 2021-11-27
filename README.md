@@ -162,7 +162,7 @@ http://localhost:8095/todotask/todoTasks?page=0&size=10&isDone=true
  
  
 
-#### 4.Get Single Task : /todoTask?id= [GET]
+#### 4.Get Single Task By ID: /todoTask?id= [GET]
 
 * **Url**:
 ```

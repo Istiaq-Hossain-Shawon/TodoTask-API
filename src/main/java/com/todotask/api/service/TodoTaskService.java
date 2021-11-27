@@ -59,6 +59,10 @@ public class TodoTaskService {
 	}
 	
 	public TodoTask findByDescription(String description) {
+		var data =todoTaskRepository.findByDescription(description);
+		if(data.isEmpty()) {
+			return null;
+		}
 		return  todoTaskRepository.findByDescription(description).get(0);
 	}
 	public ResponseDTO findById(int id) {

@@ -27,6 +27,7 @@ import com.todotask.api.repository.TodoTaskRepository;
 import com.todotask.api.request.AuthenticationRequest;
 import com.todotask.api.response.AuthenticationResponse;
 import com.todotask.api.response.ResponseDTO;
+import com.todotask.api.service.TodoTaskService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -55,6 +56,9 @@ class TodoTaskApplicationTests {
 	
 	@Autowired
 	private WebApplicationContext context;
+	
+	@Autowired
+    private TodoTaskService totoTaskService;
 	
 	ObjectMapper objectMapper = new ObjectMapper();
 	
@@ -136,7 +140,35 @@ class TodoTaskApplicationTests {
 		Assert.assertTrue(response.getPayload().size() >= 0 && response.getPageSize()==10 && response.getPageNumber()==0);
 			
 	}
-	
+	@Test
+	public void updateTaskTest() throws Exception {
+		
+		int id=3;
+		
+		TodoTaskDto taskDto= new TodoTaskDto();
+		taskDto.setId(id);
+		taskDto.setIsDone(false);
+		taskDto.setDescription("Updated Task Information");
+		taskDto.setPiorityName("low");
+		String JsonRequest = objectMapper.writeValueAsString(taskDto);
+		
+		String token=getToken();
+		
+		
+		MvcResult result = mockMvc.perform(post("/updateTask").header(HttpHeaders.AUTHORIZATION, "Bearer "+token)
+				.content(JsonRequest).contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andExpect(status().isOk()).andReturn();
+		
+		String resultContext = result.getResponse().getContentAsString();
+		
+		ResponseDTO response = objectMapper.readValue(resultContext, ResponseDTO.class);
+		
+		ResponseDTO responseDtoUpdatedEntity=totoTaskService.findById(id);
+		
+		Assert.assertTrue(response.getErrorcode() == 0 
+				&& response.getPayload().get(0).getDescription().equals(responseDtoUpdatedEntity.getPayload().get(0).getDescription()));
+			
+	}
 	private String getToken() throws Exception {
 		AuthenticationRequest user = new AuthenticationRequest();
 		user.setUsername("user1");

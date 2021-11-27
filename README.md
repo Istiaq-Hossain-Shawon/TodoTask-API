@@ -54,8 +54,17 @@ It's possible that you need to update Maven project. To do it, just right-click 
 Maven > Update Project...
 `
 
+#### Step 4: Provide Mysql Username and password.
 
-#### Step 4: Run Java application
+To provide mysql username and password , go to application-dev.yml  file from resources  and changes it :
+
+`
+url: jdbc:mysql://localhost:3306/todotask?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false
+username: *****
+password: *****
+`
+
+#### Step 5: Run Java application
 
 ## Api Documentation
 

@@ -3,47 +3,28 @@ package com.todotask.api;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import java.util.Base64;
-
-import org.aspectj.lang.annotation.Before;
-import org.assertj.core.api.Assertions;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
-
 import com.todotask.api.dto.TodoTaskDto;
-import com.todotask.api.model.Piority;
-import com.todotask.api.model.TodoTask;
-import com.todotask.api.repository.PiorityRepository;
-import com.todotask.api.repository.TodoTaskRepository;
 import com.todotask.api.request.AuthenticationRequest;
 import com.todotask.api.response.AuthenticationResponse;
 import com.todotask.api.response.ResponseDTO;
 import com.todotask.api.service.TodoTaskService;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.runners.Suite;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 
 
 @RunWith(SpringRunner.class)
@@ -67,7 +48,7 @@ class TodoTaskApplicationTests {
 	{
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 	}
-	
+	// JUnit test for request token
 	@Test
 	public void getRequestTokenTest() throws Exception {
 		AuthenticationRequest user = new AuthenticationRequest();
@@ -89,7 +70,7 @@ class TodoTaskApplicationTests {
 	}
 	
 	
-	
+	// JUnit test for adding task
 	@Test
 	public void addTodoTaskTest() throws Exception {
 		TodoTaskDto taskDto = new TodoTaskDto();
@@ -115,7 +96,7 @@ class TodoTaskApplicationTests {
 			
 	}
 
-
+	// JUnit test for get task list 
 	@Test
 	public void getTaskListTest() throws Exception {
 		
@@ -140,6 +121,7 @@ class TodoTaskApplicationTests {
 		Assert.assertTrue(response.getPayload().size() >= 0 && response.getPageSize()==10 && response.getPageNumber()==0);
 			
 	}
+	// JUnit test for updating task
 	@Test
 	public void updateTaskTest() throws Exception {
 		
@@ -170,7 +152,7 @@ class TodoTaskApplicationTests {
 			
 	}
 	
-
+	// JUnit test for getting task by id
 	@Test
 	public void getTaskByIdTest() throws Exception {
 		
@@ -194,7 +176,7 @@ class TodoTaskApplicationTests {
 			
 	}
 	
-
+	// JUnit test for deleting task by id
 	@Test
 	public void deleteTaskByIdTest() throws Exception {
 		

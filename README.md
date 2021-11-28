@@ -117,6 +117,7 @@ This include 7 api endpoints.These are:
  * **Url**:
 ```
 http://localhost:8095/todotask/requesttoken
+
 ```
  * **Body**:
  ```
@@ -252,9 +253,11 @@ http://localhost:8095/todotask/todoTask?id=8
 * **Url**:
 ```
 http://localhost:8095/todotask/addTask
+
 ```
  * **Body**:
- ```{
+ ```
+ {
    "description":"Task 11222234",
    "isDone": false,
    "piorityName":"high"
@@ -286,6 +289,7 @@ http://localhost:8095/todotask/addTask
 * **Url**:
 ```
 http://localhost:8095/todotask/updateTask
+
 ```
  * **Body**:
  ```{
@@ -322,6 +326,7 @@ http://localhost:8095/todotask/updateTask
 * **Url**:
 ```
 http://localhost:8095/todotask/deleteTask
+
 ```
  * **Body**:
  ```{

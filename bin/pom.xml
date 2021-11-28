@@ -11,7 +11,7 @@
 	<groupId>com.todotask</groupId>
 	<artifactId>todotask</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>todotask</name>
+	<name>geolocation</name>
 	<description>Demo project for TODO TASK Api</description>
 	<properties>
 		<java.version>11</java.version>
@@ -33,7 +33,7 @@
 		 <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
+            <version>8.0.18</version>
         </dependency>
 			
 			<dependency>

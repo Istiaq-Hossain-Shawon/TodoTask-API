@@ -1,5 +1,5 @@
 server:
-    port: 8096
+    port: 8095
     servlet:
       context-path: /todotask
  
@@ -7,9 +7,9 @@ spring:
   datasource:
     platform: mysql
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://mysqltask/todotask?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false
+    url: jdbc:mysql://localhost:3306/todotask?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false
     username: root
-    password: 1123456
+    password: 123456
   jpa:
     hibernate.ddl-auto: update
     generate-ddl: true

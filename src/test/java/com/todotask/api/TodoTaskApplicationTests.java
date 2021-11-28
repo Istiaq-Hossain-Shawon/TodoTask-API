@@ -74,7 +74,7 @@ class TodoTaskApplicationTests {
 	@Test
 	public void addTodoTaskTest() throws Exception {
 		TodoTaskDto taskDto = new TodoTaskDto();
-		taskDto.setDescription("Task 1");
+		taskDto.setDescription("Task 158");
 		taskDto.setIsDone(false);
 		taskDto.setPiorityName("low");
 		
@@ -83,7 +83,7 @@ class TodoTaskApplicationTests {
 		String token=getToken();
 		
 		
-		MvcResult result = mockMvc.perform(post("/AddTask").header(HttpHeaders.AUTHORIZATION, "Bearer "+token).content(JsonRequest).contentType(MediaType.APPLICATION_JSON_VALUE))
+		MvcResult result = mockMvc.perform(post("/addTask").header(HttpHeaders.AUTHORIZATION, "Bearer "+token).content(JsonRequest).contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(status().isOk()).andReturn();
 		
 		String resultContext = result.getResponse().getContentAsString();

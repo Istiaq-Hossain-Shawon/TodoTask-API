@@ -66,55 +66,6 @@ password: *****
 
 #### Step 5: Run Java application
 
-## Dockerize the application
-Make sure that Docker is installed on the PC
-#### 1.  Create Docker Network
-```
-docker network create todo-network
-
-```
-#### 1.  Create Docker Network
-```
-docker network create todo-network
-
-```
-
-#### 2. Create Mysql Container and run
-
-```
-docker container run --name mysqltask --network todo-network -e MYSQL_ROOT_PASSWORD=1123456 -e MYSQL_DATABASE=todotask -d mysql:8
-
-```
-#### 3.  Check container List and check the ID:
-```
-docker container ls
-
-```
-#### 4.  Check Container logs:
-```
-docker container logs -f ae
-
-```
-
-#### 5.  Check Database is created or not :
-```
-docker container exec -it ae bash
-
-```
-#### 6.  Check The DockerFile of Spring boot project:
-```
-From openjdk:8
-copy ./target/todotask-0.0.1-SNAPSHOT.jar todotask-0.0.1-SNAPSHOT.jar
-CMD ["java","-jar","todotask-0.0.1-SNAPSHOT.jar"]
-
-```
-#### 7.  Build the docker image for the spring boot project: :
-```
-docker image build -t todo-docker 
-
-```
-
-
 ## Api Documentation
 
 This include 7 api endpoints.These are:

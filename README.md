@@ -73,12 +73,6 @@ Make sure that Docker is installed on the PC
 docker network create todo-network
 
 ```
-#### 1.  Create Docker Network
-```
-docker network create todo-network
-
-```
-
 #### 2. Create Mysql Container and run
 
 ```

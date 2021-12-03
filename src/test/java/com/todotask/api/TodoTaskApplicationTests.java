@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.Base64;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,14 +45,15 @@ class TodoTaskApplicationTests {
 	
 	ObjectMapper objectMapper = new ObjectMapper();
 	
-	@org.junit.Before
-	public void setUp()
+	
+	@BeforeEach
+	void setUp()
 	{
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 	}
 	// JUnit test for request token
 	@Test
-	public void getRequestTokenTest() throws Exception {
+	void getRequestTokenTest() throws Exception {
 		AuthenticationRequest user = new AuthenticationRequest();
 		user.setUsername("user1");
 		user.setPassword("123456");
@@ -66,19 +68,23 @@ class TodoTaskApplicationTests {
 		AuthenticationResponse response = objectMapper.readValue(resultContext, AuthenticationResponse.class);
 		
 		System.out.println(response.getJwt());
-		Assert.assertTrue(isJWT(response.getJwt()) == Boolean.TRUE);
+		
+		boolean isJwt=isJWT(response.getJwt());
+		
+		Assert.assertEquals(Boolean.TRUE, isJwt);
+		
 			
 	}
 	
 	
 	// JUnit test for adding task
 	@Test
-	public void addTodoTaskTest() throws Exception {
+	void addTodoTaskTest() throws Exception {
 		TodoTaskDto taskDto = new TodoTaskDto();
 		taskDto.setDescription("Task 158");
 		taskDto.setIsDone(false);
 		taskDto.setPiorityName("low");
-		
+		taskDto.setCreatedBy("user1");
 		String JsonRequest = objectMapper.writeValueAsString(taskDto);
 		
 		String token=getToken();
@@ -91,15 +97,15 @@ class TodoTaskApplicationTests {
 		
 		ResponseDTO response = objectMapper.readValue(resultContext, ResponseDTO.class);
 		
-		System.out.println(response.getErrorcode());
-		System.out.println(response.getErrormsg());
-		Assert.assertTrue(response.getErrorcode() == 0);
+		Integer num=0;
+		
+		Assert.assertEquals(num, response.getErrorcode());
 			
 	}
 
 	// JUnit test for get task list 
 	@Test
-	public void getTaskListTest() throws Exception {
+	void getTaskListTest() throws Exception {
 		
 		
 		String JsonRequest = objectMapper.writeValueAsString("");
@@ -124,7 +130,7 @@ class TodoTaskApplicationTests {
 	}
 	// JUnit test for updating task
 	@Test
-	public void updateTaskTest() throws Exception {
+	void updateTaskTest() throws Exception {
 		
 		int id=3;
 		
@@ -155,7 +161,7 @@ class TodoTaskApplicationTests {
 	
 	// JUnit test for getting task by id
 	@Test
-	public void getTaskByIdTest() throws Exception {
+	void getTaskByIdTest() throws Exception {
 		
 		int id=3;
 		
@@ -179,7 +185,7 @@ class TodoTaskApplicationTests {
 	
 	// JUnit test for deleting task by id
 	@Test
-	public void deleteTaskByIdTest() throws Exception {
+	void deleteTaskByIdTest() throws Exception {
 		
 		int id=5;
 		
@@ -199,10 +205,11 @@ class TodoTaskApplicationTests {
 		
 		ResponseDTO response = objectMapper.readValue(resultContext, ResponseDTO.class);
 		
-		Assert.assertTrue(response.getErrorcode() == 0);
+		Integer num=0;
+		
+		Assert.assertEquals(response.getErrorcode(), num);
 			
 	}
-	
 	
 	private String getToken() throws Exception {
 		AuthenticationRequest user = new AuthenticationRequest();

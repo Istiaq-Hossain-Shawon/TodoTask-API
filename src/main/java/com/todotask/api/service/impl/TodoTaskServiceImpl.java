@@ -42,10 +42,10 @@ public class TodoTaskServiceImpl implements  TodoTaskService {
 		}else {
 			tasks= todoTaskRepository.findByIsDone(isDone,PageRequest.of(page.orElse(0),size,Sort.by(Sort.Direction.DESC, "piority")));
 		}
-		return ConvertDataTodoTaskResponseDTO(tasks);
+		return convertDataTodoTaskResponseDTO(tasks);
 		
 	}
-	private ResponseDTO ConvertDataTodoTaskResponseDTO(Page<TodoTask> data)	{
+	private ResponseDTO convertDataTodoTaskResponseDTO(Page<TodoTask> data)	{
 		ResponseDTO responseDto= new ResponseDTO();
 		List<TodoTaskDto> taskDtoList= new ArrayList<TodoTaskDto>();
 		data.getContent().forEach(task -> {
@@ -76,9 +76,9 @@ public class TodoTaskServiceImpl implements  TodoTaskService {
 	public ResponseDTO findById(int id) {
 		var data =todoTaskRepository.findById(id);
 		if(data.isEmpty()) {
-			ResponseDTO responseDTO = TodoTaskUtil.createResponseFalied("Task Does not found.");
-			return responseDTO;
+			return TodoTaskUtil.createResponseFalied("Task Does not found.");
 		}
+		
 		TodoTaskDto todoTaskDto=new TodoTaskDto();
 		todoTaskDto.setId(data.get().getId());
 		todoTaskDto.setIsDone(data.get().getIsDone());
@@ -95,16 +95,16 @@ public class TodoTaskServiceImpl implements  TodoTaskService {
 	@Override
 	public ResponseDTO save(TodoTaskDto taskDto) {
 		
-		var TotoTaskEntiry = new TodoTask();
-		BeanUtils.copyProperties(taskDto, TotoTaskEntiry);
+		var totoTaskEntiry = new TodoTask();
+		BeanUtils.copyProperties(taskDto, totoTaskEntiry);
 		Piority piority=piorityRepository.findByName(taskDto.getPiorityName());
 		if(piority==null) {
 			return TodoTaskUtil.createResponseFalied("Invalid Piority Name.");
 		}
-		TotoTaskEntiry.setPiority(piority);
-		TotoTaskEntiry=todoTaskRepository.saveAndFlush(TotoTaskEntiry);
+		totoTaskEntiry.setPiority(piority);
+		totoTaskEntiry=todoTaskRepository.saveAndFlush(totoTaskEntiry);
 		ResponseDTO responseDTO = TodoTaskUtil.createResponseSuccess();
-		taskDto.setId(TotoTaskEntiry.getId());
+		taskDto.setId(totoTaskEntiry.getId());
 		var list = new ArrayList<TodoTaskDto>();		
 		list.add(taskDto);
 		responseDTO.setPayload(list);
@@ -140,8 +140,8 @@ public class TodoTaskServiceImpl implements  TodoTaskService {
 			return TodoTaskUtil.createResponseFalied("Invalid Task .Task does  not found.");
 		} else {			
 			todoTaskRepository.delete(check.get());
-		}
-		ResponseDTO responseDTO = TodoTaskUtil.createResponseSuccess();
-		return responseDTO;
+		}		
+		return TodoTaskUtil.createResponseSuccess();
+		
 	}
 }

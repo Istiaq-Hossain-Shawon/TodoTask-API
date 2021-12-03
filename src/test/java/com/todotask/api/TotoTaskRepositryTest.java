@@ -33,32 +33,31 @@ class TotoTaskRepositryTest {
 	    @Test
 	    @Order(1)
 	    @Rollback(value = false)
-	    public void savePiorityTest(){
+	    void savePiorityTest(){
 	    	Piority piority =new Piority();
 	    	piority.setPiorityId(1);
 	    	piority.setName("low");
 	    	piorityRepository.save(piority);
-	        Assertions.assertThat(piority.getPiorityId()).isGreaterThan(0);
+	        Assertions.assertThat(piority.getPiorityId()).isPositive();
 	    }
 	    
 	    // JUnit test for saveTodoTask
 	    @Test
 	    @Order(2)
 	    @Rollback(value = false)
-	    public void saveTodoTaskTest(){
+	    void saveTodoTaskTest(){
 
 	    	TodoTask todoTask =new TodoTask();	    	
 	    	todoTask.setDescription("Task 123");
 	    	todoTask.setIsDone(false);
 	    	todoTask.setPiority(piorityRepository.findByName("low"));
 	    	totoTaskRepository.save(todoTask);
-	    	System.out.println(todoTask.getId());
-	        Assertions.assertThat(todoTask.getId()).isGreaterThan(0);
+	        Assertions.assertThat(todoTask.getId()).isPositive();
 	    }
 	 // JUnit test for get single task by id
 	    @Test
 	    @Order(3)
-	    public void getTodoTaskTest(){
+	    void getTodoTaskTest(){
 
 	    	TodoTask totoTask = totoTaskRepository.findById(1).get();
 
@@ -68,18 +67,19 @@ class TotoTaskRepositryTest {
 	 // JUnit test for get all task list
 	    @Test
 	    @Order(4)
-	    public void getListOfTaskTest(){
+	    void getListOfTaskTest(){
 
 	        List<TodoTask> totoTasks = totoTaskRepository.findAll();	        
 
-	        Assertions.assertThat(totoTasks.size()).isGreaterThan(0);
+	        Assertions.assertThat(totoTasks.size()).isPositive();
 
 	    }
+	    
 	 // JUnit test for update task
 	    @Test
 	    @Order(5)
 	    @Rollback(value = false)
-	    public void updateTodoTaskTest(){
+	    void updateTodoTaskTest(){
 
 	    	TodoTask totoTask = totoTaskRepository.findById(1).get();
 
@@ -94,7 +94,7 @@ class TotoTaskRepositryTest {
 	    @Test
 	    @Order(6)
 	    @Rollback(value = false)
-	    public void deleteTodoTaskTest(){
+	    void deleteTodoTaskTest(){
 
 	    	TodoTask todotask = totoTaskRepository.findById(1).get();
 

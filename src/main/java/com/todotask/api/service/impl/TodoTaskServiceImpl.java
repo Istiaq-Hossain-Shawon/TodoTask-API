@@ -47,7 +47,7 @@ public class TodoTaskServiceImpl implements  TodoTaskService {
 	}
 	private ResponseDTO convertDataTodoTaskResponseDTO(Page<TodoTask> data)	{
 		ResponseDTO responseDto= new ResponseDTO();
-		List<TodoTaskDto> taskDtoList= new ArrayList<TodoTaskDto>();
+		List<TodoTaskDto> taskDtoList= new ArrayList<>();
 		data.getContent().forEach(task -> {
 			TodoTaskDto todoTaskDto = new TodoTaskDto();
 			todoTaskDto.setId(task.getId());

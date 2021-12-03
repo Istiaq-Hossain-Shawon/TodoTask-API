@@ -41,14 +41,15 @@ public class TodoTaskController {
 		return todoTaskService.findById(id);
 	}
 	
+	
 	@PostMapping(value = "/addTask")	
-	public ResponseDTO AddTask(@RequestBody TodoTaskDto taskDTO,Principal principal)
+	public ResponseDTO addTask(@RequestBody TodoTaskDto taskDTO,Principal principal)
 	{
-		if(TodoTaskUtil.checkIfNull(taskDTO.getDescription())) {
+		if(Boolean.TRUE.equals(TodoTaskUtil.checkIfNull(taskDTO.getDescription()))) {
 			logger.error("Description is mendatory.");			
 			return TodoTaskUtil.createResponseFalied("Description is mendatory.");
 		}
-		if(TodoTaskUtil.checkIfNull(taskDTO.getPiorityName())) {
+		if(Boolean.TRUE.equals(TodoTaskUtil.checkIfNull(taskDTO.getPiorityName()))) {
 			logger.error("Piority Name is mendatory.");			
 			return TodoTaskUtil.createResponseFalied("Piority Name is mendatory.");
 		}
@@ -60,8 +61,7 @@ public class TodoTaskController {
 		
 		try
 		{
-			ResponseDTO responseDTO = todoTaskService.save(taskDTO);
-			return responseDTO;
+			return todoTaskService.save(taskDTO);
 		}
 		catch (Exception e)
 		{
@@ -73,11 +73,11 @@ public class TodoTaskController {
 	@PostMapping(value = "/updateTask")	
 	public ResponseDTO updateTask(@RequestBody TodoTaskDto taskDTO)
 	{
-		if(TodoTaskUtil.checkIfNull(taskDTO.getDescription())) {
+		if(Boolean.TRUE.equals(TodoTaskUtil.checkIfNull(taskDTO.getDescription()))) {
 			logger.error("Description is mendatory.");			
 			return TodoTaskUtil.createResponseFalied("Description is mendatory.");
 		}
-		if(TodoTaskUtil.checkIfNull(taskDTO.getPiorityName())) {
+		if(Boolean.TRUE.equals(TodoTaskUtil.checkIfNull(taskDTO.getPiorityName()))) {
 			logger.error("Piority Name is mendatory.");			
 			return TodoTaskUtil.createResponseFalied("Piority Name is mendatory.");
 		}
@@ -92,8 +92,7 @@ public class TodoTaskController {
 		
 		try
 		{
-			ResponseDTO responseDTO = todoTaskService.update(taskDTO);
-			return responseDTO;
+			return todoTaskService.update(taskDTO);
 		}
 		catch (Exception e)
 		{
@@ -112,8 +111,7 @@ public class TodoTaskController {
 		
 		try
 		{
-			ResponseDTO responseDTO = todoTaskService.delete(taskDTO);
-			return responseDTO;
+			return todoTaskService.delete(taskDTO);
 		}
 		catch (Exception e)
 		{

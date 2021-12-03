@@ -8,14 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import com.todotask.api.model.Piority;
 
- 
 
-
-@Transactional
-@Repository
 public interface PiorityRepository extends JpaRepository<Piority,Integer> {
+	@Transactional
 	Piority findByName(String name);
-	
-	
-	
 }

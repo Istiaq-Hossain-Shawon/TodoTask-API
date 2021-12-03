@@ -1,7 +1,5 @@
 package com.todotask.api;
 
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,6 +49,7 @@ class TotoTaskRepositryTest {
 	    	todoTask.setDescription("Task 123");
 	    	todoTask.setIsDone(false);
 	    	todoTask.setPiority(piorityRepository.findByName("low"));
+	    	todoTask.setCreatedBy("user1");
 	    	totoTaskRepository.save(todoTask);
 	        Assertions.assertThat(todoTask.getId()).isPositive();
 	    }

@@ -3,12 +3,15 @@ package com.todotask.api;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.security.Principal;
 import java.util.Base64;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -89,8 +92,10 @@ class TodoTaskApplicationTests {
 		
 		String token=getToken();
 		
+		Principal mockPrincipal = Mockito.mock(Principal.class);
+	    Mockito.when(mockPrincipal.getName()).thenReturn("me");
 		
-		MvcResult result = mockMvc.perform(post("/addTask").header(HttpHeaders.AUTHORIZATION, "Bearer "+token).content(JsonRequest).contentType(MediaType.APPLICATION_JSON_VALUE))
+		MvcResult result = mockMvc.perform(post("/addTask").principal(mockPrincipal).header(HttpHeaders.AUTHORIZATION, "Bearer "+token).content(JsonRequest).contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(status().isOk()).andReturn();
 		
 		String resultContext = result.getResponse().getContentAsString();

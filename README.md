@@ -40,7 +40,7 @@ $ git clone https://github.com/Istiaq-Hossain-Shawon/TodoTask-API
 
 ```
 
-#### Step 3: Import geolocation-api  Maven Project into Eclipse
+#### Step 3: Import tototask Maven Project into Eclipse
 
 To import an existing Maven project into Eclipse, just right-click the Package Explorer and go to:
 

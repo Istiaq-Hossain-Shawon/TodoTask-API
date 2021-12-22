@@ -20,9 +20,9 @@ import org.junit.jupiter.api.MethodOrderer;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class TotoTaskRepositryTest {
+class TodoTaskRepositryTest {
 	    @Autowired
-	    private TodoTaskRepository totoTaskRepository;
+	    private TodoTaskRepository todoTaskRepository;
 	    
 	    @Autowired
 	    private PiorityRepository piorityRepository;
@@ -50,7 +50,7 @@ class TotoTaskRepositryTest {
 	    	todoTask.setIsDone(false);
 	    	todoTask.setPiority(piorityRepository.findByName("low"));
 	    	todoTask.setCreatedBy("user1");
-	    	totoTaskRepository.save(todoTask);
+	    	todoTaskRepository.save(todoTask);
 	        Assertions.assertThat(todoTask.getId()).isPositive();
 	    }
 	 // JUnit test for get single task by id
@@ -58,9 +58,9 @@ class TotoTaskRepositryTest {
 	    @Order(3)
 	    void getTodoTaskTest(){
 
-	    	TodoTask totoTask = totoTaskRepository.findById(1).get();
+	    	TodoTask todoTask = todoTaskRepository.findById(1).get();
 
-	        Assertions.assertThat(totoTask.getId()).isEqualTo(1);
+	        Assertions.assertThat(todoTask.getId()).isEqualTo(1);
 
 	    }
 	 // JUnit test for get all task list
@@ -68,9 +68,9 @@ class TotoTaskRepositryTest {
 	    @Order(4)
 	    void getListOfTaskTest(){
 
-	        List<TodoTask> totoTasks = totoTaskRepository.findAll();	        
+	        List<TodoTask> todoTasks = todoTaskRepository.findAll();	        
 
-	        Assertions.assertThat(totoTasks.size()).isPositive();
+	        Assertions.assertThat(todoTasks.size()).isPositive();
 
 	    }
 	    
@@ -80,13 +80,13 @@ class TotoTaskRepositryTest {
 	    @Rollback(value = false)
 	    void updateTodoTaskTest(){
 
-	    	TodoTask totoTask = totoTaskRepository.findById(1).get();
+	    	TodoTask todoTask = todoTaskRepository.findById(1).get();
 
-	    	totoTask.setDescription("Updated Task");;
+	    	todoTask.setDescription("Updated Task");;
 
-	    	TodoTask totoTaskUpdated =  totoTaskRepository.save(totoTask);
+	    	TodoTask todoTaskUpdated =  todoTaskRepository.save(todoTask);
 
-	        Assertions.assertThat(totoTaskUpdated.getDescription()).isEqualTo("Updated Task");
+	        Assertions.assertThat(todoTaskUpdated.getDescription()).isEqualTo("Updated Task");
 
 	    }
 	 // JUnit test for delete task
@@ -95,13 +95,13 @@ class TotoTaskRepositryTest {
 	    @Rollback(value = false)
 	    void deleteTodoTaskTest(){
 
-	    	TodoTask todotask = totoTaskRepository.findById(1).get();
+	    	TodoTask todotask = todoTaskRepository.findById(1).get();
 
-	    	totoTaskRepository.delete(todotask);	        
+	    	todoTaskRepository.delete(todotask);	        
 
 	        TodoTask todotask1 = null;
 
-	        Optional<TodoTask> optionaltask = totoTaskRepository.findById(1);
+	        Optional<TodoTask> optionaltask = todoTaskRepository.findById(1);
 
 	        if(optionaltask.isPresent()){
 	        	todotask1 = optionaltask.get();

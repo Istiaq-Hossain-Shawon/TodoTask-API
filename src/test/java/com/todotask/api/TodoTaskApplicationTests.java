@@ -44,7 +44,7 @@ class TodoTaskApplicationTests {
 	private WebApplicationContext context;
 	
 	@Autowired
-    private TodoTaskService totoTaskService;
+    private TodoTaskService todoTaskService;
 	
 	ObjectMapper objectMapper = new ObjectMapper();
 	
@@ -157,7 +157,7 @@ class TodoTaskApplicationTests {
 		
 		ResponseDTO response = objectMapper.readValue(resultContext, ResponseDTO.class);
 		
-		ResponseDTO responseDtoUpdatedEntity=totoTaskService.findById(id);
+		ResponseDTO responseDtoUpdatedEntity=todoTaskService.findById(id);
 		
 		Assert.assertTrue(response.getErrorcode() == 0 
 				&& response.getPayload().get(0).getDescription().equals(responseDtoUpdatedEntity.getPayload().get(0).getDescription()));
